@@ -22,6 +22,7 @@ function App() {
   };
 
   const rollDice = () => {
+    setCount((count) => count + 1);
     if (!win) {
       setDice((oldDice) =>
         oldDice.map((die) => {
@@ -29,6 +30,7 @@ function App() {
         })
       );
     } else {
+      setCount(0);
       setWin(false);
       setDice(allNewDice());
     }
@@ -44,6 +46,7 @@ function App() {
 
   const [dice, setDice] = useState(allNewDice());
   const [win, setWin] = useState(false);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     const allSelected = dice.every((die) => die.selected);
@@ -73,6 +76,9 @@ function App() {
           Roll until all dice are the same.
           <br />
           Click on each die to freeze it.
+          <br />
+          <br />
+          <strong>No. of rolls: {count}</strong>
         </p>
       </div>
       <div className="dice-container">{diceElements}</div>
